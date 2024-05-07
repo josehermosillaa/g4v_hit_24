@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from .models import Flan
+from django.shortcuts import render, HttpResponseRedirect
+from .models import Flan, ContactForm
+from .forms import ContactFormForm
 
 def indice(request):
     #el contexto, es el diccionario donde se envian los datos
-    # flanes = Flan.objects.all() #SELECT * FROM FLAN
+    # flanes = Flan.objects.all() #SELECT * FROM FLAN WHERE is_private=False
     public_flans = Flan.objects.filter(is_private=False)
     context = {
         'public_flans':public_flans
@@ -20,3 +21,25 @@ def bienvenido(request):
         'private_flans': private_flans
     }
     return render(request, 'welcome.html', context)
+
+
+def contacto(request):
+    #el contexto, es el diccionario donde se envian los datos
+    # flanes = Flan.objects.all() #SELECT * FROM FLAN WHERE is_private=False
+    print(request.POST)
+    if request.method == 'POST':
+        form = ContactFormForm(request.POST)
+        #chequear que los datos son validos
+        if form.is_valid():
+            #procesamos los datos del formulario
+            contact_form = ContactForm.objects.create(**form.cleaned_data)
+            return HttpResponseRedirect('/exito/')
+    else:
+        #si entro por la url (method GET)
+        form = ContactFormForm()
+    context = {'form':form}
+    return render(request, 'contact.html', context)
+
+    
+def exito(request):
+    return render(request, 'exito.html')

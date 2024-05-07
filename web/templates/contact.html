@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %} Contacto OnlyFlans {% endblock title %}
+{% block contenido %}
+<div class= 'container'>
+    <h1>contacto</h1>
+    <form action="{% url 'contacto'%}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+{% endblock contenido%}

@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 # Create your models here.
@@ -13,3 +14,13 @@ class Flan(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+class ContactForm(models.Model):
+    contact_form_uuid = models.UUIDField(default=uuid.uuid4, editable=False) #no podremos modificarlo (en elpanel de admin)
+    customer_email = models.EmailField()
+    customer_name = models.CharField(max_length=64)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.customer_email} - Mensaje: {self.message}"
+    
