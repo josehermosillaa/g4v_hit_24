@@ -6,7 +6,11 @@
     <h1>contacto</h1>
     <form action="{% url 'contacto'%}" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        <!-- {{form.as_p}} -->
+        {{form.non_field_errors}}
+        <div class="mb-3 text center">
+            {{form.as_p}}
+        </div>
         <input type="submit" value="Submit">
     </form>
 </div>
