@@ -11,3 +11,9 @@ class ContactFormModelForm(ModelForm):
     class Meta:
         model = ContactForm
         fields = '__all__'
+        labels = {
+            'message':'Mensaje',
+            'customer_name':'Nombre',
+            'customer_email':'Correo'
+            
+        }
