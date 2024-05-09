@@ -1,6 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Flan, ContactForm
 from .forms import ContactFormForm, ContactFormModelForm
+
 
 def indice(request):
     #el contexto, es el diccionario donde se envian los datos
@@ -15,6 +19,7 @@ def indice(request):
 def acerca(request):
     return render(request, 'about.html', {})
 
+@login_required
 def bienvenido(request):
     private_flans = Flan.objects.filter(is_private=True) #ORM Django Flan(tabla) objects filter, is_private=true
     #SELECT * FROM FLan WHERE is_private=True
@@ -45,3 +50,6 @@ def contacto(request):
     
 def exito(request):
     return render(request, 'exito.html')
+
+class MiVistaProtegida(LoginRequiredMixin, TemplateView):
+    template_name = 'about.html'
