@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+
+{% block contenido %}
+<h1>Bienvenido {{user.username}} a sus Flanes Privados</h1>
+<h1>Receta de {{flan.name}}</h1>
+<img src="{{flan.image_url}}">
+<p>{{flan.receta}}</p>
+
+{% endblock contenido%}

@@ -51,5 +51,11 @@ def contacto(request):
 def exito(request):
     return render(request, 'exito.html')
 
+
+def receta(request, flan_uuid):
+    flan = Flan.objects.get(flan_uuid = flan_uuid)
+    context = {'flan': flan}
+    return render(request, 'receta.html', context)
+
 class MiVistaProtegida(LoginRequiredMixin, TemplateView):
     template_name = 'about.html'
