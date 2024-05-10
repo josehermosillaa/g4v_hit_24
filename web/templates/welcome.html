@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
 {% block contenido %}
-<h1>Bienvenido a sus Flanes Privados</h1>
+<h1>Bienvenido {{user.username}} a sus Flanes Privados</h1>
 <div class="row mt-4 mb-4">
     {% for flan in private_flans %}
 
